@@ -1,7 +1,7 @@
 // -----------------------------
 // API URL
 // -----------------------------
-const API_URL = "http://127.0.0.1:5000/predict";
+const API_URL = "/predict";
 
 // DOM Elements
 const fileInput = document.getElementById("fileInput");
@@ -360,3 +360,4 @@ window.onload = function () {
   updateText(storedLang);
   hideCustomAlert();
 };
+
