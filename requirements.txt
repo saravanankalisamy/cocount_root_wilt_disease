@@ -1,7 +1,8 @@
 flask
+flask-cors
 torch
 torchvision
-numpy
+timm
 pillow
+numpy
 gunicorn
-flask-cors
