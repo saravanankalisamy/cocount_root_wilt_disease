@@ -53,7 +53,7 @@ remedies = {
 }
 
 # -----------------------------
-# ⚙️ Device
+# ⚙️ Device Setup
 # -----------------------------
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
@@ -69,7 +69,7 @@ model.to(device)
 model.eval()
 
 # -----------------------------
-# 🖼️ Transform
+# 🖼️ Image Preprocessing
 # -----------------------------
 transform = transforms.Compose([
     transforms.Resize((256,256)),
@@ -79,28 +79,34 @@ transform = transforms.Compose([
 ])
 
 # -----------------------------
-# 🌐 Flask
+# 🌐 Flask Setup
 # -----------------------------
 app = Flask(__name__)
 CORS(app)
 
-# Home page
+# -----------------------------
+# Home Page
+# -----------------------------
 @app.route("/")
 def home():
     return send_file("index.html")
 
+# -----------------------------
 # CSS
+# -----------------------------
 @app.route("/style.css")
 def css():
     return send_from_directory(".", "style.css")
 
+# -----------------------------
 # JS
+# -----------------------------
 @app.route("/script.js")
 def js():
     return send_from_directory(".", "script.js")
 
 # -----------------------------
-# 🔍 Prediction
+# Prediction API
 # -----------------------------
 @app.route("/predict", methods=["POST"])
 def predict():
@@ -147,5 +153,8 @@ def predict():
         "confidence": f"{confidence_pct}%"
     })
 
+# -----------------------------
+# Run Server
+# -----------------------------
 if __name__ == "__main__":
-    app.run()
+    app.run(host="0.0.0.0", port=5000)
